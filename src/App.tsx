@@ -33,7 +33,7 @@ function App() {
     newUtter.onstart = () => setIsPlaying(true);
     newUtter.onend = () => {
       setIsPlaying(false);
-      setProgress(100);
+      setProgress(0);
     };
     newUtter.onboundary = (event) => {
       if (event.name === "word") {
@@ -51,7 +51,7 @@ function App() {
   }, [utter]);
   return (
     <div className="h-full w-full">
-      {defaultVoicse && (
+      {defaultVoicse ? (
         <div className="p-2 flex flex-col h-full">
           <div className="bg-slate-500 rounded-lg text-white p-2 mb-2">
             <div>默认模型:{defaultVoicse.name}</div>
@@ -72,7 +72,7 @@ function App() {
             {isPlaying ? "停止" : "播放"}
           </button>
         </div>
-      )}
+      ):<div className=" text-center">不支持 TTS</div>}
     </div>
   );
 }
