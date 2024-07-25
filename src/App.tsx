@@ -5,6 +5,9 @@ function App() {
   const [defaultVoicse, setDefaultVoicse] = useState<
     SpeechSynthesisVoice | undefined
   >(undefined);
+  const [utter, setUtter] = useState<SpeechSynthesisUtterance | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [readTxt, setReadTxt] = useState<string>("");
   useEffect(() => {
     const handleVoicesChanged = () => {
@@ -17,10 +20,7 @@ function App() {
     return () => {
       speechSynthesis.onvoiceschanged = null;
     };
-  });
-  const [utter, setUtter] = useState<SpeechSynthesisUtterance | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [progress, setProgress] = useState(0);
+  },[]);
   const handlePlay = () => {
     if (isPlaying) {
       speechSynthesis.cancel();
