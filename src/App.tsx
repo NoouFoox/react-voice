@@ -33,10 +33,10 @@ function App() {
     newUtter.onstart = () => setIsPlaying(true);
     newUtter.onend = () => {
       setIsPlaying(false);
-      setProgress(0);
+      setProgress(100);
     };
     newUtter.onboundary = (event) => {
-      if (event.name === 'word') {
+      if (event.name === "word") {
         const spokenLength = event.charIndex + event.charLength;
         const totalLength = readTxt.length;
         setProgress((spokenLength / totalLength) * 100);
@@ -62,9 +62,14 @@ function App() {
             onChange={(event) => setReadTxt(event.target.value)}
             className="w-full rounded-lg p-1 mb-2 flex-1"
           />
+          <div className="h-1 rounded-lg bg-red-100 mb-2 overflow-hidden">
+            <div
+              style={{ width: progress + "%",transition:'width 1s' }}
+              className="bg-red-500 h-full"
+            ></div>
+          </div>
           <button className="w-full" onClick={handlePlay}>
             {isPlaying ? "停止" : "播放"}
-            {progress!==0&&progress}
           </button>
         </div>
       )}
